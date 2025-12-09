@@ -9,6 +9,7 @@ pipeline {
                 }
                 sh 'mkdir -p artifacts'
                 sh 'cp complete/target/*.jar artifacts/'
+                sh 'cp complete/target/*.jar /jenkins-artifacts/'
             }
         }
     }
