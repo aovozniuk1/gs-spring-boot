@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                dir('complete') {
+                    sh './mvnw clean install'
+                }
+                sh 'mkdir -p artifacts'
+                sh 'cp complete/target/*.jar artifacts/'
+            }
+        }
+    }
+
+    post {
+        success {
+            archiveArtifacts artifacts: 'artifacts/*.jar', fingerprint: true
+        }
+    }
+}
